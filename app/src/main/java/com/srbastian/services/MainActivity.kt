@@ -16,16 +16,20 @@ class MainActivity : AppCompatActivity() {
         stopClasicService = findViewById(R.id.stopService)
         jobIntentService = findViewById(R.id.jobIntent)
 
+        //This service runs in the main thread
         startClasicService.setOnClickListener {
             val intent = Intent(this@MainActivity, ClasicService :: class.java)
             startService(intent)
         }
+        // this one stops the ClasicService
         stopClasicService.setOnClickListener {
             val intent = Intent(this@MainActivity, ClasicService :: class.java)
             stopService(intent)
         }
+        // async Service this one creates his own tread to run
         jobIntentService.setOnClickListener {
-
+            val intent = Intent(this@MainActivity, JobIntentServiceExample::class.java)
+            JobIntentServiceExample.backGroundService(this@MainActivity, intent)
         }
     }
 }
